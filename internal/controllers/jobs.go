@@ -45,7 +45,7 @@ func (c *JobsController) SignalHelloWorld(ctx *gin.Context) {
 		return
 	}
 
-	ctx.JSON(http.StatusOK, response)
+	ctx.JSON(http.StatusAccepted, response)
 }
 
 func (c *JobsController) GetHelloWorldStatus(ctx *gin.Context) {
