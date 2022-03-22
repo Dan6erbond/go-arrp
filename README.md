@@ -46,6 +46,16 @@ $ go run ./cmd/server/
 
 > Note: Just like workers the server should be built and started as a binary in production.
 
+## Tests
+
+In order to run tests Cadence and the workers need to be running. See above on how to start them.
+
+Use `go test` to run all the tests:
+
+```sh
+$ go test -v ./...
+```
+
 ## Configuration
 
 Go ARRP uses Viper to read configuration from the environment variables and the config file in [`configs/application.yml`](./configs/application.yml). Modify this file if you want to change the default values.
