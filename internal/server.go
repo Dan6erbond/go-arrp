@@ -8,9 +8,9 @@ import (
 	"openwt.com/go-arrp/internal/services"
 )
 
-func MakeServer() *gin.Engine {
+func MakeServer(c ...*config.AppConfig) *gin.Engine {
 	var appConfig config.AppConfig
-	appConfig.Setup()
+	appConfig.Setup(c...)
 	var cadenceClient cadence.CadenceAdapter
 	cadenceClient.Setup(&appConfig.Cadence)
 

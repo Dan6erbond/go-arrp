@@ -3,20 +3,20 @@ package config
 import (
 	"fmt"
 
+	"github.com/jinzhu/copier"
 	"github.com/spf13/viper"
 	"go.uber.org/zap"
 )
 
 type AppConfig struct {
 	Env            string
-	WorkerTaskList string
 	Cadence        CadenceConfig
 	Logger         *zap.Logger
 }
 
-func (h *AppConfig) Setup() {
+func (h *AppConfig) Setup(c ...*AppConfig) {
 	viper.SetConfigName("application")
-	viper.AddConfigPath("configs") // These two lines will make sure viper pulls the config from app/resources/application.yml
+	viper.AddConfigPath("./configs")
 	viper.SetConfigType("yml")
 
 	viper.AutomaticEnv() // This allows viper to read variables from the environment variables if they exists.
@@ -28,6 +28,10 @@ func (h *AppConfig) Setup() {
 	err := viper.Unmarshal(&h)
 	if err != nil {
 		fmt.Printf("Unable to decode into struct, %v", err)
+	}
+
+	if len(c) > 0 {
+		copier.Copy(&h, c[0])
 	}
 
 	logger, err := zap.NewDevelopment()
