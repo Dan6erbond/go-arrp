@@ -2,6 +2,12 @@
 
 Implementation of the [async request-response pattern](https://docs.microsoft.com/en-us/azure/architecture/patterns/async-request-reply) in Go with Gin and Cadence.
 
+## Demo
+
+A short video demoing the implementation of the async request-response pattern:
+
+![Go ARRP Demo GIF](./docs/Go-ARRP.gif)
+
 ## Architecture
 
 Go ARRP uses Cadence to orchestrate workflows and manages workers to register various workflows and activities.
@@ -45,6 +51,10 @@ $ go run ./cmd/server/
 ```
 
 > Note: Just like workers the server should be built and started as a binary in production.
+
+## Cadence Web UI
+
+The Cadence Web UI is included in the Docker Compose to allow users to view the progress of workflows and activities. To access the it, navigate to http://localhost:8088/domains/go-arrp.
 
 ## Tests
 
