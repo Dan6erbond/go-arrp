@@ -8,6 +8,8 @@ A short video demoing the implementation of the async request-response pattern:
 
 ![Go ARRP Demo GIF](./docs/Go-ARRP.gif)
 
+View the [higher quality video](./docs/Go-ARRP.mp4).
+
 ## Architecture
 
 Go ARRP uses Cadence to orchestrate workflows and manages workers to register various workflows and activities.
