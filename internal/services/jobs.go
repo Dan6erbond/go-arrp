@@ -69,8 +69,20 @@ func (s *JobsService) GetHelloWorldStatus(workflowID string) (*dto.HelloWorldSta
 
 	s.logger.Info("Got workflow status!", zap.String("WorkflowId", workflowID), zap.String("Status", status))
 
+	var result string
+	if status == "completed" {
+		workflow := s.cadenceAdapter.CadenceClient.GetWorkflow(context.Background(), workflowID, "")
+		if workflow != nil {
+			err = workflow.Get(context.Background(), &result)
+		}
+		if err != nil {
+			s.logger.Error("Failed to get workflow result!", zap.Error(err))
+		}
+	}
+
 	return &dto.HelloWorldStatusResponse{
 		Message: "Queried status.",
 		Status:  status,
+		Result:  result,
 	}, nil
 }

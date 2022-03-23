@@ -21,4 +21,5 @@ type SignalHelloWorldResponse struct {
 type HelloWorldStatusResponse struct {
 	Message string `json:"message"`
 	Status  string `json:"status"`
+	Result  string `json:"result"`
 }
