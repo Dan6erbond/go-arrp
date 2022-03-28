@@ -5,18 +5,19 @@ import (
 
 	"github.com/jinzhu/copier"
 	"github.com/spf13/viper"
+	"go.uber.org/fx"
 	"go.uber.org/zap"
 )
 
 type AppConfig struct {
-	Env            string
-	Cadence        CadenceConfig
-	Logger         *zap.Logger
+	Env     string
+	Cadence CadenceConfig
+	Logger  *zap.Logger
 }
 
 func (h *AppConfig) Setup(c ...*AppConfig) {
 	viper.SetConfigName("application")
-	viper.AddConfigPath("./configs")
+	viper.AddConfigPath("configs")
 	viper.SetConfigType("yml")
 
 	viper.AutomaticEnv() // This allows viper to read variables from the environment variables if they exists.
@@ -42,3 +43,13 @@ func (h *AppConfig) Setup(c ...*AppConfig) {
 
 	logger.Debug("Finished loading Configuration!")
 }
+
+func ProvideConfig(c ...*AppConfig) *AppConfig {
+	var config AppConfig
+	config.Setup(c...)
+	return &config
+}
+
+var Module = fx.Options(
+	fx.Provide(ProvideConfig),
+)

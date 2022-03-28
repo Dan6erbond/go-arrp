@@ -8,7 +8,7 @@ require (
 	github.com/uber-go/tally v3.3.15+incompatible
 	go.uber.org/cadence v0.19.0
 	go.uber.org/yarpc v1.55.0
-	go.uber.org/zap v1.13.0
+	go.uber.org/zap v1.16.0
 )
 
 require (
@@ -56,6 +56,8 @@ require (
 	github.com/uber/tchannel-go v1.16.0 // indirect
 	github.com/ugorji/go/codec v1.2.7 // indirect
 	go.uber.org/atomic v1.7.0 // indirect
+	go.uber.org/dig v1.14.0 // indirect
+	go.uber.org/fx v1.17.1 // indirect
 	go.uber.org/multierr v1.6.0 // indirect
 	go.uber.org/net/metrics v1.3.0 // indirect
 	go.uber.org/thriftrw v1.25.0 // indirect

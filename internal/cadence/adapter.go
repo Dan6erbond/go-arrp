@@ -8,6 +8,7 @@ import (
 	"go.uber.org/cadence/client"
 	"go.uber.org/cadence/encoded"
 	"go.uber.org/cadence/workflow"
+	"go.uber.org/fx"
 	"go.uber.org/zap"
 	"openwt.com/go-arrp/internal/config"
 )
@@ -62,3 +63,13 @@ func (h *CadenceAdapter) Setup(config *config.CadenceConfig) {
 		logger.Info("Domain successfully registered.", zap.String("Domain", domainName), zap.String("HostPort", hostPort))
 	}
 }
+
+func ProvideCadence(config *config.CadenceConfig) *CadenceAdapter {
+	var cadenceAdapter CadenceAdapter
+	cadenceAdapter.Setup(config)
+	return &cadenceAdapter
+}
+
+var Module = fx.Options(
+	fx.Provide(ProvideCadence),
+)
